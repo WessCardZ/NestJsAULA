@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Bind, Param } from '@nestjs/common';
 
 const GATOS = [
     {
@@ -25,6 +25,12 @@ const GATOS = [
 export class CatsController {
     @Get()
     findAll(){
-        return {GATOS}
+        return GATOS
+    }
+
+    @Get(':id')
+    @Bind(Param())
+    findOne(params){
+        return 'retorna os dados do gato ' + params.id
     }
 }

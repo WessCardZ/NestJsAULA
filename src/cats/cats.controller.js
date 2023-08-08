@@ -1,4 +1,5 @@
 import { Controller, Get, Bind, Param, Res, HttpStatus, Delete } from '@nestjs/common';
+import { REDIRECT_METADATA } from '../../node_modules/@nestjs/common/constants';
 
 const GATOS = [
     {
@@ -44,8 +45,15 @@ export class CatsController {
     }
 
     @Delete(':id')
-    @Bind(Param('id'))
-    remove(id){
-        return `Remove gato com id = ${id}.`
+    @Bind(Param('id'), Res())
+    remove(id, res){
+        const indexGatoEncontrado = GATOS.findIndex(gato => gato.id == id)
+        if(indexGatoEncontrado >= 0){
+            GATOS.splice(indexGatoEncontrado, 1)
+            res.status(HttpStatus.NO_CONTENT).send()
+        }
+        else{
+            res.status(HttpStatus.NOT_FOUND).send()
+        }
     }
 }

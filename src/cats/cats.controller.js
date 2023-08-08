@@ -1,5 +1,4 @@
 import { Controller, Get, Bind, Param, Res, HttpStatus, Delete } from '@nestjs/common';
-import { REDIRECT_METADATA } from '../../node_modules/@nestjs/common/constants';
 
 const GATOS = [
     {

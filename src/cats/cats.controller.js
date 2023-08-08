@@ -1,4 +1,4 @@
-import { Controller, Get, Bind, Param, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Bind, Param, Res, HttpStatus, Delete } from '@nestjs/common';
 
 const GATOS = [
     {
@@ -41,5 +41,11 @@ export class CatsController {
             // return "gato não encontrado"
         }
        
+    }
+
+    @Delete(':id')
+    @Bind(Param('id'))
+    remove(id){
+        return `Remove gato com id = ${id}.`
     }
 }

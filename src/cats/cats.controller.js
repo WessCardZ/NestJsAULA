@@ -1,4 +1,4 @@
-import { Controller, Get, Bind, Param, Res, HttpStatus, Delete, Post, Body } from '@nestjs/common';
+import { Controller, Get, Bind, Param, Res, HttpStatus, Delete, Post, Body, Put } from '@nestjs/common';
 
 const GATOS = [
     {
@@ -61,5 +61,11 @@ export class CatsController {
     create(cat, res){
         GATOS.push(cat)
         res.status(HttpStatus.CREATED).json(cat)
+    }
+
+    @Put(':id')
+    @Bind(Param('id'), Body())
+    update(id, cat){
+        return `Atualizando gato com id ${id} e valores ${JSON.stringify(cat)}`
     }
 }

@@ -64,8 +64,15 @@ export class CatsController {
     }
 
     @Put(':id')
-    @Bind(Param('id'), Body())
-    update(id, cat){
-        return `Atualizando gato com id ${id} e valores ${JSON.stringify(cat)}`
+    @Bind(Param('id'), Body(), Res())
+    update(id, cat, res){
+        const indexGatoEncontrado = GATOS.findIndex(gato => gato.id == id)
+        if(indexGatoEncontrado >= 0){
+            GATOS.splice(indexGatoEncontrado, 1, cat)
+            res.status(HttpStatus.NO_CONTENT).send()
+        }
+        else{
+            res.status(HttpStatus.NOT_FOUND).send()
+        }
     }
 }

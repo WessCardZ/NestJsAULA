@@ -12,6 +12,12 @@ export class CatsService {
         this.cats.push(cat)
     }
     findById(id){
-       return this.cats.find(cat => cat.id == id)
+        return this.cats.find(cat => cat.id == id)
+    }
+    findIndexById(id){
+        return this.cats.findIndex(cat => cat.id == id)
+    }
+    deleteByIndex(index){
+        this.cats.splice(index, 1)
     }
 }

@@ -52,9 +52,9 @@ export class CatsController {
     @Delete(':id')
     @Bind(Param('id'), Res())
     remove(id, res){
-        const indexGatoEncontrado = GATOS.findIndex(gato => gato.id == id)
+        const indexGatoEncontrado = this.catsService.findIndexById(id)
         if(indexGatoEncontrado >= 0){
-            GATOS.splice(indexGatoEncontrado, 1)
+            this.catsService.deleteByIndex(indexGatoEncontrado)
             res.status(HttpStatus.NO_CONTENT).send()
         }
         else{
